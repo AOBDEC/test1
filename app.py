@@ -3,12 +3,13 @@ import logging
 
 app = Flask(__name__)
 
-@app.route('/SBPaymentResultReceiver/v1/data', methods=['POST'])
+@app.route('/SBPaymentResultReceiver/v1/data', methods=['GET', 'POST'])
 def sb_payment_result_receiver():
     # リクエスト情報の取得
     body = request.get_data(as_text=True)
     content_type = request.headers.get('Content-Type')
     res_result = request.args.get('res_result')  # クエリパラメータから取得
+    res_method = request.method
 
     # ログ出力（検証用）
     logging.info(f"Content-Type: {content_type}")
@@ -21,6 +22,7 @@ def sb_payment_result_receiver():
       <head><meta charset="Shift_JIS"><title>SBペイメント検証</title></head>
       <body>
         <h2>決済結果を受信しました</h2>
+        <p>{res_method}</p>
         <p><strong>res_result:</strong> {res_result}</p>
         <p><strong>Content-Type:</strong> {content_type}</p>
         <p><strong>Body:</strong> {body}</p>
