@@ -30,8 +30,21 @@ def sb_payment_result_receiver():
     </html>
     """
 
-    response = Response(html_content.encode('shift_jis'), content_type='text/html; charset=Shift_JIS')
-    response.status_code = 200
+    # response = Response(html_content.encode('shift_jis'), content_type='text/html; charset=Shift_JIS')
+    # response.status_code = 200
+    # return response
+    # レスポンス内容
+    csv_content = 'OK,'
+
+    # Shift_JISでエンコード
+    encoded_content = csv_content.encode('shift_jis')
+
+    # Flaskのレスポンスオブジェクトで返す
+    response = Response(
+        encoded_content,
+        status=200,
+        content_type='text/csv; charset=Shift_JIS'
+    )
     return response
 
 if __name__ == '__main__':
