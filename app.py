@@ -10,13 +10,16 @@ def sb_payment_result_receiver():
     # リクエスト情報の取得
     body = request.get_data(as_text=True)
     content_type = request.headers.get('Content-Type')
-    res_result = request.args.get('res_result')  # クエリパラメータから取得
+    res_result = request.form.get('res_result')  # クエリパラメータから取得
+    item_name = request.form.get('item_name')
     res_method = request.method
 
     # ログ出力（検証用）
+    logging.info(f"res_method: {res_method}")
     logging.info(f"Content-Type: {content_type}")
     logging.info(f"Body: {body}")
     logging.info(f"res_result: {res_result}")
+    logging.info(f"item_name: {item_name}")
 
     # HTMLとして表示（Shift_JISで返す）
     html_content = f"""
