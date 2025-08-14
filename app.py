@@ -3,7 +3,7 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/pagecon', methods=['GET'])
+@app.route('/pagecon', methods=['POST'])
 def pagecon():
     print(f"Access from {request.remote_addr}, query: {request.args}")
     return "<h2>決済完了</h2>"
